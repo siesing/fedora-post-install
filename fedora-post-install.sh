@@ -1,14 +1,17 @@
 #!/bin/bash
 echo ""
 echo -e "########################################################## \n"
-echo -e "Let's go! \n"
-echo -e "Tweaking dnf\n"
+echo -e "Tweaking DNF\n"
 
 # tweak dnf
-echo 'max_parallel_downloads=10' | sudo tee -a /etc/dnf/dnf.conf
+if grep -q '^max_parallel_downloads=10$' /etc/dnf/dnf.conf; then
+    echo -e "Whoa, hold your horses! The configuration gods have already fixed it.\n"
+else
+    echo 'max_parallel_downloads=10' | sudo tee -a /etc/dnf/dnf.conf
+    echo -e "Setting added to DNF.\n"
+fi
 
-echo ""
-echo -e "DNF tweaked. Nailed it!\n"
+echo -e "##########################################################\n"
 echo -e "Time for a distro update, here we go!\n"
 echo -e "##########################################################\n"
 
@@ -18,21 +21,27 @@ sudo dnf -y upgrade --refresh
 
 echo ""
 echo -e "Distro updated and upgraded. Boom!\n"
+echo -e "##########################################################\n"
 echo -e "Let the software installation extravaganza commence!\n"
+echo -e "##########################################################\n"
 
 # install software
 sudo dnf install -y p7zip p7zip-plugins unrar unzip neofetch kitty stacer wget gnome-tweak-tool 
 
 echo ""
 echo -e "The software arsenal just got a powerful boost.\n"
+echo -e "##########################################################\n"
 echo -e "Time to bid farewell to some software.\n"
+echo -e "##########################################################\n"
 
 # remove software
 sudo dnf remove -y libreoffice* rhythmbox evolution
 
 echo ""
 echo -e "Going, going...gone!\n"
+echo -e "##########################################################\n"
 echo -e "Let's unleash the Flatpak frenzy!\n"
+echo -e "##########################################################\n"
 
 # Check if Flathub remote is added to Fedora
 # Run flatpak remote-list command to get the list of remotes
@@ -47,7 +56,9 @@ else
     echo -e "Flathub remote added.\n"
 fi
 
+echo -e "##########################################################\n"
 echo -e "Let's get those must-have flatpaks up and running!\n"
+echo -e "##########################################################\n"
 
 flatpak install -y flathub com.mattjakeman.ExtensionManager
 flatpak install -y flathub org.signal.Signal
@@ -61,7 +72,9 @@ flatpak install -y flathub com.discordapp.Discord
 
 echo ""
 echo -e "Flatpaks: installed and ready to rock!\n"
-echo -e "Getting ready to unleash the magic of neofetch on your next terminal startup!\n"
+echo -e "##########################################################\n"
+echo -e "Splashing the magic of neofetch on your next terminal startup!\n"
+echo -e "##########################################################\n"
 
 # add neofetch in .bashrc
 if ! grep -Fxq "neofetch" "$HOME/.bashrc"; then
