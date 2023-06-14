@@ -22,3 +22,5 @@ Now give that script a high-five and hit the runway by running it like there's n
 ```
 
 This script performs a symphony of digital wonders—a thrilling ride as it optimizes the speed of the package manager, updates Fedora, installs essential software, bids farewell to the unnecessary software, sets up the Flathub repository, installs must-have Flatpaks, and adds a touch of enchantment to the Terminal with the mesmerizing neofetch.
+
+Kudos to me for choosing the efficient path to digital bliss! :beer:
