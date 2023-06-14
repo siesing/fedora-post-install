@@ -1,7 +1,7 @@
 # fedora-post-install
 Life is not always the way we want it to be, but at least your Fedora distro can be.
 
-Voila! My ideal post-install Fedora setup awaits you, fresh out of the digital oven. It's crafted to perfection, tailored to my needs, and ready to deliver an exceptional computing experience. Sit back, relax, and enjoy the wonders of my Fedora configuration.
+Voilà! My ideal post-install Fedora setup awaits you, fresh out of the digital oven. It's crafted to perfection, tailored to my needs, and ready to deliver an exceptional computing experience. Sit back, relax, and enjoy the wonders of my Fedora configuration.
 
 #### :heart: Remember Sharing Is Caring
 
