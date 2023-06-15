@@ -26,7 +26,7 @@ echo -e "Let the software installation extravaganza commence!\n"
 echo -e "##########################################################\n"
 
 # install software
-sudo dnf install -y p7zip p7zip-plugins unrar unzip neofetch kitty stacer wget gnome-tweak-tool 
+sudo dnf install -y p7zip p7zip-plugins unrar unzip neofetch kitty stacer wget gnome-tweak-tool steam-devices 
 
 echo ""
 echo -e "The software arsenal just got a powerful boost.\n"
