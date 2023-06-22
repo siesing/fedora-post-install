@@ -31,7 +31,7 @@ sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.m
 sudo dnf update --refresh
 
 # install software
-sudo dnf install -y p7zip p7zip-plugins unrar unzip neofetch kitty stacer wget gnome-tweak-tool code
+sudo dnf install -y p7zip p7zip-plugins unrar unzip neofetch kitty stacer wget gnome-tweak-tool steam-devices code
 
 echo ""
 echo -e "The software arsenal just got a powerful boost.\n"
