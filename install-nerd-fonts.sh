@@ -16,9 +16,6 @@ declare -a fonts=(
 # Set the directory where the fonts will be installed
 fonts_dir="${HOME}/.local/share/fonts"
 
-# To install system wide fonts (uncomment the line below and comment the line above)
-#fonts_dir="/usr/share/fonts"
-
 # Get the latest release information
 response=$(curl -s "https://api.github.com/repos/$OWNER/$REPO/releases/latest")
 
