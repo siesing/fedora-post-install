@@ -4,7 +4,8 @@
 OWNER="ryanoasis"
 REPO="nerd-fonts"
 
-# Declare an array of font names to download
+# Declare an array of font names to download and install
+# For more fonts check https://www.nerdfonts.com/
 declare -a fonts=(
     FiraCode
     JetBrainsMono
