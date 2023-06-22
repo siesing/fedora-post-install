@@ -25,8 +25,13 @@ echo -e "##########################################################\n"
 echo -e "Let the software installation extravaganza commence!\n"
 echo -e "##########################################################\n"
 
+# add rpm's key and repository for vscode and update
+sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
+sudo dnf update --refresh
+
 # install software
-sudo dnf install -y p7zip p7zip-plugins unrar unzip neofetch kitty stacer wget gnome-tweak-tool 
+sudo dnf install -y p7zip p7zip-plugins unrar unzip neofetch kitty stacer wget gnome-tweak-tool code
 
 echo ""
 echo -e "The software arsenal just got a powerful boost.\n"
@@ -62,7 +67,6 @@ echo -e "##########################################################\n"
 
 flatpak install -y flathub com.mattjakeman.ExtensionManager
 flatpak install -y flathub org.signal.Signal
-flatpak install -y flathub com.visualstudio.code
 flatpak install -y flathub io.gitlab.librewolf-community
 flatpak install -y flathub com.valvesoftware.Steam
 flatpak install -y flathub org.gnome.Extensions
