@@ -31,7 +31,7 @@ sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.m
 sudo dnf update --refresh
 
 # install software
-sudo dnf install -y p7zip p7zip-plugins unrar unzip neofetch kitty stacer wget gnome-tweak-tool steam-devices code
+sudo dnf install -y p7zip p7zip-plugins unrar unzip neofetch wget gnome-tweak-tool steam-devices code
 
 echo ""
 echo -e "The software arsenal just got a powerful boost.\n"
@@ -73,6 +73,7 @@ flatpak install -y flathub org.gnome.Extensions
 flatpak install -y flathub com.spotify.Client
 flatpak install -y flathub org.videolan.VLC
 flatpak install -y flathub com.discordapp.Discord
+flatpak install -y flathub com.bitwarden.desktop
 
 echo ""
 echo -e "Flatpaks: installed and ready to rock!\n"
