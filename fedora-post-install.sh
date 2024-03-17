@@ -76,11 +76,13 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 for flatpak_name in "${must_have_flatpaks[@]}"; do
     # Check if the Flatpak application is installed
     if ! flatpak list --app --columns=application | grep -q "$flatpak_name"; then
-        echo "\n⟹ Flatpak $flatpak_name is not installed. Installing...\n"
+        echo "⟹ Flatpak $flatpak_name is not installed. Installing..."
         flatpak install flathub "$flatpak_name" -y
         need_installation=true
     fi
 done
+
+echo -e "\n⟹ Splashing the magic of fastfetch on your next terminal startup!\n"
 
 # Add fastfetch in .bashrc
 if ! grep -Fxq "fastfetch" "$user_home_folder/.bashrc"; then
