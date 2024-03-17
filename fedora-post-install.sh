@@ -1,89 +1,86 @@
 #!/bin/bash
-echo ""
-echo -e "########################################################## \n"
-echo -e "Tweaking DNF\n"
+echo -e "\n##########################################################\n"
+echo -e "⟶ Tweaking DNF\n"
 
-# tweak dnf
-if grep -q '^max_parallel_downloads=10$' /etc/dnf/dnf.conf; then
-    echo -e "Whoa, hold your horses! The configuration gods have already fixed it.\n"
-else
-    echo 'max_parallel_downloads=10' | sudo tee -a /etc/dnf/dnf.conf
-    echo -e "Setting added to DNF.\n"
-fi
+# Tweak dnf settings for optimization
+dnf_settings=(
+    "fastestmirror=True"
+    "max_parallel_downloads=20"
+    "defaultyes=True"
+)
 
-echo -e "##########################################################\n"
-echo -e "Time for a distro update, here we go!\n"
-echo -e "##########################################################\n"
+dnf_conf_file="/etc/dnf/dnf.conf"
+
+# Loop through the array and add settings if they don't exist
+for setting in "${dnf_settings[@]}"; do
+    if ! grep -q "^$setting" "$dnf_conf_file"; then
+        echo "$setting" >> "$dnf_conf_file"
+        echo "Added setting: $setting"
+    else
+        echo "Setting already exists: $setting"
+    fi
+done
+
+echo -e "➔ Now, let's update the system, here we go!\n"
 
 # Make sure system is up to date
 sudo dnf -y update
 sudo dnf -y upgrade --refresh
 
-echo ""
-echo -e "Distro updated and upgraded. Boom!\n"
-echo -e "##########################################################\n"
-echo -e "Let the software installation extravaganza commence!\n"
-echo -e "##########################################################\n"
+echo -e "\n➔ Distro updated and upgraded. Boom!\n"
 
-# add rpm's key and repository for vscode and update
+echo -e "➔ Let the software installation extravaganza commence!\n"
+
+# Import rpm's key and repository for vscode and update
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
 sudo dnf update --refresh
 
-# install software
-sudo dnf install -y p7zip p7zip-plugins unrar unzip neofetch wget gnome-tweak-tool steam-devices code
+# Install software
+sudo dnf -y install fastfetch gnome-tweaks steam-devices code
 
-echo ""
-echo -e "The software arsenal just got a powerful boost.\n"
-echo -e "##########################################################\n"
-echo -e "Time to bid farewell to some software.\n"
-echo -e "##########################################################\n"
+echo -e "\n ➔The software arsenal just got a powerful boost.\n"
+
+echo -e "➔ Time to bid farewell to some software.\n"
 
 # remove software
-sudo dnf remove -y libreoffice* rhythmbox evolution
+sudo dnf -y remove totem rhythmbox gnome-tour yelp simple-scan
 
-echo ""
-echo -e "Going, going...gone!\n"
-echo -e "##########################################################\n"
-echo -e "Let's unleash the Flatpak frenzy!\n"
-echo -e "##########################################################\n"
+echo -e "\n➔ Going, going...gone!\n"
 
-# Check if Flathub remote is added to Fedora
-# Run flatpak remote-list command to get the list of remotes
-remotes=$(flatpak remote-list)
+echo -e "➔ Let's install some must-have flatpaks!\n"
 
-# Check if Flathub remote is present in the list
-if [[ $remotes =~ "flathub" ]]; then
-    echo -e "Flathub remote already in place.\n"
-else
-    echo "Adding Flathub remote to Fedora."
-    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-    echo -e "Flathub remote added.\n"
+# Check for flathub remote
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+# Define the list of Flatpak applications to check and install
+must_have_flatpaks=(
+"org.gnome.Extensions"
+"com.mattjakeman.ExtensionManager"
+"org.signal.Signal"
+"io.gitlab.librewolf-community"
+"com.valvesoftware.Steam"
+"com.spotify.Client"
+"org.videolan.VLC"
+"com.discordapp.Discord"
+"com.bitwarden.desktop"
+"io.github.peazip.PeaZip"
+)
+
+# Loop through the list of Flatpak applications
+for flatpak_name in "${must_have_flatpaks[@]}"; do
+    # Check if the Flatpak application is installed
+    if ! flatpak list --app --columns=application | grep -q "$flatpak_name"; then
+        echo "➔ Flatpak $flatpak_name is not installed. Installing..."
+        flatpak install flathub "$flatpak_name" -y
+        need_installation=true
+    fi
+done
+
+# Add fastfetch in .bashrc
+if ! grep -Fxq "fastfetch" "$HOME/.bashrc"; then
+    echo "fastfetch" >> "$HOME/.bashrc"
 fi
 
+echo -e "➔ You did it, like a boss! High-fives and victory dances are now in order.\n"
 echo -e "##########################################################\n"
-echo -e "Let's get those must-have flatpaks up and running!\n"
-echo -e "##########################################################\n"
-
-flatpak install -y flathub com.mattjakeman.ExtensionManager
-flatpak install -y flathub org.signal.Signal
-flatpak install -y flathub io.gitlab.librewolf-community
-flatpak install -y flathub com.valvesoftware.Steam
-flatpak install -y flathub org.gnome.Extensions
-flatpak install -y flathub com.spotify.Client
-flatpak install -y flathub org.videolan.VLC
-flatpak install -y flathub com.discordapp.Discord
-flatpak install -y flathub com.bitwarden.desktop
-
-echo ""
-echo -e "Flatpaks: installed and ready to rock!\n"
-echo -e "##########################################################\n"
-echo -e "Splashing the magic of neofetch on your next terminal startup!\n"
-echo -e "##########################################################\n"
-
-# add neofetch in .bashrc
-if ! grep -Fxq "neofetch" "$HOME/.bashrc"; then
-    echo "neofetch" >> "$HOME/.bashrc"
-fi
-
-echo -e "You did it, like a boss! High-fives and victory dances are now in order.\n"
