@@ -6,7 +6,6 @@ user_home_folder=/home/user-name
 
 # Define a list of Flatpaks to install
 must_have_flatpaks=(
-"org.gnome.Extensions"
 "com.mattjakeman.ExtensionManager"
 "org.signal.Signal"
 "io.gitlab.librewolf-community"
