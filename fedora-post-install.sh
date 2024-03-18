@@ -50,13 +50,18 @@ echo -e "\n⟹ System updated and upgraded. Boom!\n"
 
 echo -e "⟹ Let the software installation extravaganza commence!\n"
 
-# Import rpm's key and repository for vscode and update
+# Add repository and import rpm's key for vscode
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
+
+# Add repository and import rpm's key for Brave Browser
+sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86_64/
+sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+
 sudo dnf update --refresh
 
 # Install software
-sudo dnf -y install fastfetch gnome-tweaks steam-devices code
+sudo dnf -y install dnf-plugins-core fastfetch gnome-tweaks steam-devices code brave-browser
 
 echo -e "\n⟹ The software arsenal just got a powerful boost.\n"
 
