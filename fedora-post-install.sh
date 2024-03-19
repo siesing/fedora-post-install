@@ -42,32 +42,32 @@ done
 echo -e "\n⟹ Now, let's update the system, here we go!\n"
 
 # Make sure system is up to date
-sudo dnf -y update
-sudo dnf -y upgrade --refresh
+dnf -y update
+dnf -y upgrade --refresh
 
 echo -e "\n⟹ System updated and upgraded. Boom!\n"
 
 echo -e "⟹ Let the software installation extravaganza commence!\n"
 
 # Add repository and import rpm's key for vscode
-sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
+rpm --import https://packages.microsoft.com/keys/microsoft.asc
+sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
 
 # Add repository and import rpm's key for Brave Browser
-sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86_64/
-sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86_64/
+rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
 
-sudo dnf update --refresh
+dnf update --refresh
 
 # Install software
-sudo dnf -y install dnf-plugins-core fastfetch gnome-tweaks steam-devices code brave-browser
+dnf -y install dnf-plugins-core fastfetch gnome-tweaks steam-devices code brave-browser
 
 echo -e "\n⟹ The software arsenal just got a powerful boost.\n"
 
 echo -e "⟹ Time to bid farewell to some software.\n"
 
 # remove software
-sudo dnf -y remove totem rhythmbox gnome-tour yelp simple-scan
+dnf -y remove totem rhythmbox gnome-tour yelp simple-scan
 
 echo -e "\n⟹ Going, going...gone!\n"
 
