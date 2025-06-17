@@ -32,6 +32,33 @@ sudo ./fedora-post-install.sh
 
 This script performs a symphony of digital wonders—a thrilling ride as it optimizes the speed of the package manager, updates Fedora, installs essential software, bids farewell to the unnecessary software, sets up the Flathub repository, installs must-have Flatpaks, and adds a touch of enchantment to the Terminal with the mesmerizing `fastfetch`.
 
+## Setup Btrfs Snapshots with Snapper
+
+Ready to add time-travel capabilities to your Fedora system? :rocket: Behold the magnificent `setup-snapper.sh` - your personal DeLorean for system snapshots!
+
+Never again fear the dreaded system updates or experimental package installations. With Snapper at your command, you'll have the power to roll back time itself! Experience the zen of knowing that every system change can be undone with the grace of a digital time wizard.
+
+First, bestow upon the script the ancient powers of executability:
+
+```console
+chmod +x setup-snapper.sh
+```
+
+Then, with the confidence of a thousand sys admins, unleash the snapshot sorcery:
+
+```console
+sudo ./setup-snapper.sh
+```
+
+This mystical script will:
+- :camera: Configure automatic snapshots before and after every DNF transaction
+- :clock1: Set up hourly timeline snapshots (because why not?)
+- :boot: Integrate snapshots into your GRUB menu for emergency time travel
+- :sparkles: Install the beautiful Btrfs Assistant GUI for point-and-click snapshot management
+- :shield: Keep your last 5 kernels safe (because rolling back with missing kernels is no fun)
+
+Remember: While snapshots are magical, they're not a replacement for proper backups! Keep your precious data safe with an external backup strategy too. :floppy_disk:
+
 ## Install Nerd Fonts
 
 If you also want to embrace the geek and indulge in the irresistible allure of Nerd Fonts! Feast your eyes on `install-nerd-fonts.sh`, your gateway to fontastic greatness.
